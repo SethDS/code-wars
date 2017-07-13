@@ -201,6 +201,64 @@ function alphabetWar(battlefield) {
 }  //end of function
 
 
+//This is my solution for level 5 "String Incrementer"
+function incrementString (strng) {
+    var pattern = /\d{1,}/;
+    var anotherPattern = /\D/;
+    var str = strng;
+    var numberToIncrement = pattern.exec(str);
+
+    if(str === ''){
+        return "1";
+    }  else if(pattern.exec(str) === null){
+        return str + '1';
+    } else if(anotherPattern.exec(str) === null && pattern.exec(str) !== null){
+        console.log(pattern.exec(str));
+    }
+
+    function incrementZeros(){
+
+        var firstNum = numberToIncrement[0].split('');
+        var shouldIncrement = true;
+
+        console.log(firstNum);
+
+        for(var i = firstNum.length - 1; i >= 0; i--){
+
+
+
+            if(shouldIncrement === true && i === 0 && firstNum[i] != 0 && firstNum.length !== 1){
+                console.log('Hmmm');
+                console.log(firstNum, i);
+                firstNum[i] = 1;
+                firstNum.push(0);
+                shouldIncrement = false;
+                i = -1;
+            }
+
+            if(shouldIncrement === true){
+                firstNum[i] = Number(firstNum[i]) + 1;
+                if(firstNum[i] < 10){
+                    shouldIncrement = false;
+                    i = -1;
+                }
+                if(firstNum[i] === 10){
+                    firstNum[i] = 0;
+                } //end of second if
+
+            } //end of first if
+
+        }//end of for loop
+
+
+        return str.split('').splice(0, numberToIncrement.index).join('') + firstNum.join('') ;
+
+    } //end of incrementZeros
+
+    return incrementZeros();
+
+}
+
 
 
 
